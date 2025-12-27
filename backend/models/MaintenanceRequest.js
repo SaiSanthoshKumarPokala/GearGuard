@@ -1,23 +1,64 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const requestSchema = new mongoose.Schema({
-  subject: String,
-  type: {
+const maintenanceRequestSchema = new mongoose.Schema({
+  subject: {
     type: String,
-    enum: ["Corrective", "Preventive"]
+    required: true,
   },
   equipment: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Equipment"
+    ref: 'Equipment',
+    required: true,
   },
-  assignedTeam: String,
-  status: {
+  type: {
     type: String,
-    enum: ["New", "In Progress", "Repaired", "Scrap"],
-    default: "New"
+    enum: ['Corrective', 'Preventive'],
+    required: true,
   },
-  scheduledDate: Date,
-  duration: Number
+  stage: {
+    type: String,
+    enum: ['New', 'In Progress', 'Repaired', 'Scrap'],
+    default: 'New',
+  },
+  priority: {
+    type: String,
+    enum: ['Low', 'Medium', 'High', 'Critical'],
+    default: 'Medium',
+  },
+  team: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Team',
+  },
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  scheduledDate: {
+    type: Date,
+  },
+  duration: {
+    type: Number, // in hours
+    default: 0,
+  },
+  description: {
+    type: String,
+  },
+  notes: {
+    type: String,
+  },
 }, { timestamps: true });
 
-module.exports = mongoose.model("MaintenanceRequest", requestSchema);
+// Virtual for checking if overdue
+maintenanceRequestSchema.virtual('isOverdue').get(function() {
+  return this.scheduledDate && 
+         this.scheduledDate < new Date() && 
+         this.stage !== 'Repaired' && 
+         this.stage !== 'Scrap';
+});
+
+module.exports = mongoose.model('MaintenanceRequest', maintenanceRequestSchema);
