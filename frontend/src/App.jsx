@@ -1,40 +1,101 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// Pages
-import Kanban from "./pages/Kanban";
-import Equipment from "./pages/Equipment";
-import CreateRequest from "./pages/CreateRequest";
-import CalendarView from "./pages/CalendarView";
-import Login from "./pages/Login";
+import Navbar from './components/Layout/Navbar';
+import Login from './pages/Login';
+import Dashboard from './components/Dashboard/Dashboard';
+import EquipmentList from './components/Equipment/EquipmentList';
+import EquipmentForm from './components/Equipment/EquipmentForm';
+import KanbanBoard from './components/Request/KanbanBoard';
+import CalendarView from './components/Request/CalendarView';
+import './App.css';
 
-// Layout
-import Navbar from "./components/Navbar";
+const PrivateRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) return <div className="loading">Loading...</div>;
+  
+  return user ? children : <Navigate to="/login" />;
+};
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-
-      <div className="p-6">
-        <Routes>
-          {/* Default Route */}
-          <Route path="/" element={<Navigate to="/kanban" />} />
-
-          {/* Core Pages */}
-          <Route path="/kanban" element={<Kanban />} />
-          <Route path="/equipment" element={<Equipment />} />
-          <Route path="/request/new" element={<CreateRequest />} />
-          <Route path="/calendar" element={<CalendarView />} />
-
-          {/* Auth */}
-          <Route path="/login" element={<Login />} />
-
-          {/* 404 */}
-          <Route path="*" element={<h1>Page Not Found</h1>} />
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <AppContent />
+          <ToastContainer position="top-right" autoClose={3000} />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
+
+const AppContent = () => {
+  const { user } = useContext(AuthContext);
+
+  return (
+    <>
+      {user && <Navbar />}
+      <div className={user ? 'main-content' : ''}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/equipment"
+            element={
+              <PrivateRoute>
+                <EquipmentList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/equipment/new"
+            element={
+              <PrivateRoute>
+                <EquipmentForm />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/equipment/:id"
+            element={
+              <PrivateRoute>
+                <EquipmentForm />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/requests"
+            element={
+              <PrivateRoute>
+                <KanbanBoard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              <PrivateRoute>
+                <CalendarView />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </div>
+    </>
+  );
+};
 
 export default App;

@@ -1,0 +1,206 @@
+.dashboard {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.dashboard-header p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.stat-icon.equipment {
+  background: #e3f2fd;
+}
+
+.stat-icon.requests {
+  background: #f3e5f5;
+}
+
+.stat-icon.teams {
+  background: #e8f5e9;
+}
+
+.stat-icon.open {
+  background: #fff3e0;
+}
+
+.stat-icon.progress {
+  background: #e1f5fe;
+}
+
+.stat-icon.repaired {
+  background: #f1f8e9;
+}
+
+.stat-content h3 {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card h3 {
+  font-size: 18px;
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.recent-requests {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-requests h3 {
+  font-size: 18px;
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.requests-table {
+  overflow-x: auto;
+}
+
+.requests-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.requests-table th {
+  background: #f5f5f5;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+
+.requests-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge.corrective {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.badge.preventive {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.badge.new {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badge.in-progress {
+  background: #e1f5fe;
+  color: #0277bd;
+}
+
+.badge.repaired {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge.scrap {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.badge.priority-low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge.priority-medium {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.badge.priority-high {
+  background: #ffe0b2;
+  color: #e65100;
+}
+
+.badge.priority-critical {
+  background: #ffcdd2;
+  color: #c62828;
+}

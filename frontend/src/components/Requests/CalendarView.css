@@ -1,0 +1,98 @@
+.calendar-view {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.calendar-section,
+.requests-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-section h2,
+.requests-section h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+}
+
+.date-badge {
+  background: #667eea;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.no-requests {
+  text-align: center;
+  color: #999;
+  padding: 40px;
+  font-style: italic;
+}
+
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.request-item {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.request-item h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.request-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.stage-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stage-badge.new {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.stage-badge.in-progress {
+  background: #e1f5fe;
+  color: #0277bd;
+}
+
+.stage-badge.repaired {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
